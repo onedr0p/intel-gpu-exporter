@@ -13,7 +13,7 @@ class DataCollector(object):
         self._endpoint = endpoint
 
     def collect(self):
-        cmd = "/usr/bin/timeout -k 2.2 2.2 /usr/bin/intel_gpu_top -J -s 1000ms"
+        cmd = "/usr/bin/timeout -k 2 2 /usr/bin/intel_gpu_top -J"
         raw_output = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode("utf-8")
         output = f"[{raw_output.translate(str.maketrans('', '', string.whitespace))}]"
         data = json.loads(output)
