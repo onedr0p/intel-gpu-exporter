@@ -18,7 +18,7 @@ class DataCollector(object):
         output = f"[{raw_output.translate(str.maketrans('', '', string.whitespace))}]"
         data = json.loads(output)
 
-        power_watts = data[1]["power"]["GPU"]
+        power_watts = data[1]["power"]["value"]
         metric = Metric("intel_gpu_power", "Power utilisation in Watts", "summary")
         metric.add_sample("intel_gpu_power", value=power_watts, labels={})
         yield metric
