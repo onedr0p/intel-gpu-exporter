@@ -1,4 +1,4 @@
-FROM docker.io/library/python:3.11.0-slim-bullseye
+FROM docker.io/library/python:3.11.1-slim-bullseye
 
 ENV \
     DEBCONF_NONINTERACTIVE_SEEN="true" \
