@@ -4,7 +4,7 @@ Get metrics from Intel GPUs
 
 ## Deployment
 
-Runs on port 8080, does stuff, is hyper glued using intel_gpu_top
+Runs on port 8080, does stuff, is hyperglued using python and intel_gpu_top
 
 ## Metrics
 

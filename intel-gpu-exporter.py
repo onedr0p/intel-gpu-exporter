@@ -18,22 +18,22 @@ class DataCollector(object):
         output = f"[{raw_output.translate(str.maketrans('', '', string.whitespace))}]"
         data = json.loads(output)
 
-        power_watts = data[1]["power"]["value"]
+        power_watts = data[1].get("power", {}).get("value", 0.0)
         metric = Metric("intel_gpu_power", "Power utilisation in Watts", "summary")
         metric.add_sample("intel_gpu_power", value=power_watts, labels={})
         yield metric
 
-        render_busy_percent = data[1]["engines"]["Render/3D/0"]["busy"]
+        render_busy_percent = data[1].get("engines", {}).get("Render/3D/0", {}).get("busy", 0.0)
         metric = Metric("intel_gpu_render_busy_percent", "Render busy utilisation in %", "summary")
         metric.add_sample("intel_gpu_render_busy_percent", value=render_busy_percent, labels={})
         yield metric
 
-        video_busy_percent = data[1]["engines"]["Video/0"]["busy"]
+        video_busy_percent = data[1].get("engines", {}).get("Video/0", {}).get("busy", 0.0)
         metric = Metric("intel_gpu_video_busy_percent", "Video busy utilisation in %", "summary")
         metric.add_sample("intel_gpu_video_busy_percent", value=video_busy_percent, labels={})
         yield metric
 
-        enhance_busy_percent = data[1]["engines"]["VideoEnhance/0"]["busy"]
+        enhance_busy_percent = data[1].get("engines", {}).get("VideoEnhance/0", {}).get("busy", 0.0)
         metric = Metric("intel_gpu_enhance_busy_percent", "Enhance busy utilisation in %", "summary")
         metric.add_sample("intel_gpu_enhance_busy_percent", value=enhance_busy_percent, labels={})
         yield metric

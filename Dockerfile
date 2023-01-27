@@ -29,8 +29,7 @@ RUN \
 
 ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/python3", "/app/intel-gpu-exporter.py"]
 
-EXPOSE 8080/tcp
-
 LABEL \
-    org.opencontainers.image.base.name="ghcr.io/onedr0p/intel-gpu-exporter" \
-    org.opencontainers.image.authors="Devin Buhl <devin.kray@gmail.com>"
+    org.opencontainers.image.title="intel-gpu-exporter" \
+    org.opencontainers.image.authors="Devin Buhl <devin.kray@gmail.com>" \
+    org.opencontainers.image.source="https://github.com/onedr0p/intel-gpu-exporter"
