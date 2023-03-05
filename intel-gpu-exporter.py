@@ -7,16 +7,28 @@ from prometheus_client import (GC_COLLECTOR, PLATFORM_COLLECTOR,
                                PROCESS_COLLECTOR, REGISTRY, Metric,
                                start_http_server)
 
+decoder = json.JSONDecoder()
+
 
 class DataCollector(object):
     def __init__(self, endpoint):
         self._endpoint = endpoint
 
+    def _parse_output(self, output):
+        data = []
+        output = output.strip()
+        while output:
+            doc, decoded_to = decoder.raw_decode(output)
+            data.append(doc)
+            output = output[decoded_to:].strip()
+            if output and output[0] == ',':
+                output = output[1:].strip()
+        return data
+
     def collect(self):
         cmd = "/usr/bin/timeout -k 2 2 /usr/bin/intel_gpu_top -J"
         raw_output = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode("utf-8")
-        output = f"[{raw_output.translate(str.maketrans('', '', string.whitespace))}]"
-        data = json.loads(output)
+        data = self._parse_output(raw_output)
 
         power_watts = data[1].get("power", {}).get("value", 0.0)
         metric = Metric("intel_gpu_power", "Power utilisation in Watts", "summary")
