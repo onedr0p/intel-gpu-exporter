@@ -1,49 +1,95 @@
-import json
-import string
+from prometheus_client import start_http_server, Gauge
+import os
+import sys
 import subprocess
-import time
+import json
+import logging
 
-from prometheus_client import (GC_COLLECTOR, PLATFORM_COLLECTOR,
-                               PROCESS_COLLECTOR, REGISTRY, Metric,
-                               start_http_server)
+igpu_engines_blitter_0_busy = Gauge('igpu_engines_blitter_0_busy', 'Blitter 0 busy utilisation %')
+igpu_engines_blitter_0_sema = Gauge('igpu_engines_blitter_0_sema', 'Blitter 0 sema utilisation %')
+igpu_engines_blitter_0_wait = Gauge('igpu_engines_blitter_0_wait', 'Blitter 0 wait utilisation %')
 
+igpu_engines_render_3d_0_busy = Gauge('igpu_engines_render_3d_0_busy', 'Render 3D 0 busy utilisation %')
+igpu_engines_render_3d_0_sema = Gauge('igpu_engines_render_3d_0_sema', 'Render 3D 0 sema utilisation %')
+igpu_engines_render_3d_0_wait = Gauge('igpu_engines_render_3d_0_wait', 'Render 3D 0 wait utilisation %')
 
-class DataCollector(object):
-    def __init__(self, endpoint):
-        self._endpoint = endpoint
+igpu_engines_video_0_busy = Gauge('igpu_engines_video_0_busy', 'Video 0 busy utilisation %')
+igpu_engines_video_0_sema = Gauge('igpu_engines_video_0_sema', 'Video 0 sema utilisation %')
+igpu_engines_video_0_wait = Gauge('igpu_engines_video_0_wait', 'Video 0 wait utilisation %')
 
-    def collect(self):
-        cmd = "/usr/bin/timeout -k 2 2 /usr/bin/intel_gpu_top -J"
-        raw_output = subprocess.run(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE).stdout.decode("utf-8")
-        output = f"[{raw_output.translate(str.maketrans('', '', string.whitespace))}]"
-        data = json.loads(output)
+igpu_engines_video_enhance_0_busy = Gauge('igpu_engines_video_enhance_0_busy', 'Video Enhance 0 busy utilisation %')
+igpu_engines_video_enhance_0_sema = Gauge('igpu_engines_video_enhance_0_sema', 'Video Enhance 0 sema utilisation %')
+igpu_engines_video_enhance_0_wait = Gauge('igpu_engines_video_enhance_0_wait', 'Video Enhance 0 wait utilisation %')
 
-        power_watts = data[1].get("power", {}).get("value", 0.0)
-        metric = Metric("intel_gpu_power", "Power utilisation in Watts", "summary")
-        metric.add_sample("intel_gpu_power", value=power_watts, labels={})
-        yield metric
+igpu_frequency_actual = Gauge('igpu_frequency_actual', 'Frequency actual MHz')
+igpu_frequency_requested = Gauge('igpu_frequency_requested', 'Frequency requested MHz')
 
-        render_busy_percent = data[1].get("engines", {}).get("Render/3D/0", {}).get("busy", 0.0)
-        metric = Metric("intel_gpu_render_busy_percent", "Render busy utilisation in %", "summary")
-        metric.add_sample("intel_gpu_render_busy_percent", value=render_busy_percent, labels={})
-        yield metric
+igpu_imc_bandwidth_reads = Gauge('igpu_imc_bandwidth_reads', 'IMC reads MiB/s')
+igpu_imc_bandwidth_writes = Gauge('igpu_imc_bandwidth_writes', 'IMC writes MiB/s')
 
-        video_busy_percent = data[1].get("engines", {}).get("Video/0", {}).get("busy", 0.0)
-        metric = Metric("intel_gpu_video_busy_percent", "Video busy utilisation in %", "summary")
-        metric.add_sample("intel_gpu_video_busy_percent", value=video_busy_percent, labels={})
-        yield metric
+igpu_interrupts = Gauge('igpu_interrupts', 'Interrupts/s')
 
-        enhance_busy_percent = data[1].get("engines", {}).get("VideoEnhance/0", {}).get("busy", 0.0)
-        metric = Metric("intel_gpu_enhance_busy_percent", "Enhance busy utilisation in %", "summary")
-        metric.add_sample("intel_gpu_enhance_busy_percent", value=enhance_busy_percent, labels={})
-        yield metric
+igpu_period = Gauge('igpu_period', 'Period ms')
 
-if __name__ == "__main__":
-    host, port = "0.0.0.0:8080".split(':')
-    start_http_server(int(port), host)
-    REGISTRY.unregister(PROCESS_COLLECTOR)
-    REGISTRY.unregister(PLATFORM_COLLECTOR)
-    REGISTRY.unregister(GC_COLLECTOR)
-    REGISTRY.register(DataCollector(f"http://{host}:{port}/metrics"))
-    while True:
-        time.sleep(1)
+igpu_power_gpu = Gauge('igpu_power_gpu', 'GPU power W')
+igpu_power_package = Gauge('igpu_power_package', 'Package power W')
+
+igpu_rc6 = Gauge('igpu_rc6', 'RC6 %')
+
+def update(data):
+    igpu_engines_blitter_0_busy.set(data.get("engines", {}).get("Blitter/0", {}).get("busy", 0.0))
+    igpu_engines_blitter_0_sema.set(data.get("engines", {}).get("Blitter/0", {}).get("sema", 0.0))
+    igpu_engines_blitter_0_wait.set(data.get("engines", {}).get("Blitter/0", {}).get("wait", 0.0))
+
+    igpu_engines_render_3d_0_busy.set(data.get("engines", {}).get("Render/3D/0", {}).get("busy", 0.0))
+    igpu_engines_render_3d_0_sema.set(data.get("engines", {}).get("Render/3D/0", {}).get("sema", 0.0))
+    igpu_engines_render_3d_0_wait.set(data.get("engines", {}).get("Render/3D/0", {}).get("wait", 0.0))
+
+    igpu_engines_video_0_busy.set(data.get("engines", {}).get("Video/0", {}).get("busy", 0.0))
+    igpu_engines_video_0_sema.set(data.get("engines", {}).get("Video/0", {}).get("sema", 0.0))
+    igpu_engines_video_0_wait.set(data.get("engines", {}).get("Video/0", {}).get("wait", 0.0))
+
+    igpu_engines_video_enhance_0_busy.set(data.get("engines", {}).get("VideoEnhance/0", {}).get("busy", 0.0))
+    igpu_engines_video_enhance_0_sema.set(data.get("engines", {}).get("VideoEnhance/0", {}).get("sema", 0.0))
+    igpu_engines_video_enhance_0_wait.set(data.get("engines", {}).get("VideoEnhance/0", {}).get("wait", 0.0))
+
+    igpu_frequency_actual.set(data.get("frequency", {}).get("actual", 0))
+    igpu_frequency_requested.set(data.get("frequency", {}).get("requested", 0))
+
+    igpu_imc_bandwidth_reads.set(data.get("imc-bandwidth", {}).get("reads", 0))
+    igpu_imc_bandwidth_writes.set(data.get("imc-bandwidth", {}).get("writes", 0))
+
+    igpu_interrupts.set(data.get("interrupts", {}).get("count", 0))
+
+    igpu_period.set(data.get("period", {}).get("duration", 0))
+
+    igpu_power_gpu.set(data.get("power", {}).get("GPU", 0))
+    igpu_power_package.set(data.get("power", {}).get("Package", 0))
+
+    igpu_rc6.set(data.get("rc6", {}).get("value", 0))
+
+if __name__ == '__main__':
+    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
+    start_http_server(8080)
+
+    period = os.getenv("REFRESH_PERIOD_MS", 5000)
+
+    cmd = '/usr/bin/intel_gpu_top -J -s {}'.format(int(period))
+    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+    logging.info('Started ' + cmd)
+    output = ''
+
+    while process.poll() is None:
+        read = process.stdout.readline()
+        output+=read.decode('utf-8')
+        if read == b'},\n':
+            update(json.loads(output[:-2]))
+            output = ''
+
+    process.kill()
+
+    if process.returncode != 0:
+        logging.error("Error: " + process.stderr.read().decode('utf-8'))
+
+    logging.info("Finished")
