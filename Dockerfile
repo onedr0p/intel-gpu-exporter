@@ -26,7 +26,7 @@ RUN \
         /var/cache/apt/* \
         /var/tmp/*
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/local/bin/python3"]
+ENTRYPOINT ["/usr/bin/tini", "--", "/usr/bin/python3"]
 CMD ["/app/intel-gpu-exporter.py"]
 
 LABEL \
