@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/ubuntu:jammy-20230308
+FROM docker.io/library/ubuntu:24.04
 
 ENV \
     DEBCONF_NONINTERACTIVE_SEEN="true" \
@@ -10,23 +10,23 @@ WORKDIR /app
 COPY . .
 
 RUN \
-    apt-get -qq update \
+    apt-get update \
     && \
-    apt-get -qq install --no-install-recommends -y \
+    apt-get install --no-install-recommends -y \
+        catatonit \
         intel-gpu-tools \
         python3-pip \
-        tini \
+    && pip install --no-cache-dir -r requirements.txt \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get clean \
-    && pip install --no-cache-dir -r requirements.txt \
     && rm -rf \
         /tmp/* \
         /var/lib/apt/lists/* \
         /var/cache/apt/* \
         /var/tmp/*
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/usr/bin/python3"]
+ENTRYPOINT ["/usr/bin/catatonit", "--", "/usr/bin/python3"]
 CMD ["/app/intel-gpu-exporter.py"]
 
 LABEL \
