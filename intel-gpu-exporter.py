@@ -72,9 +72,9 @@ if __name__ == '__main__':
     logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
     start_http_server(8080)
 
-    period = os.getenv("REFRESH_PERIOD_MS", 5000)
+    period = os.getenv("REFRESH_PERIOD_MS", 10000)
 
-    cmd = '/usr/bin/intel_gpu_top -J -s {}'.format(int(period))
+    cmd = 'intel_gpu_top -J -s {}'.format(int(period))
     process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
     logging.info('Started ' + cmd)

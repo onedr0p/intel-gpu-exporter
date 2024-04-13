@@ -1,4 +1,4 @@
-FROM docker.io/library/ubuntu:24.04
+FROM docker.io/library/python:3.12-slim
 
 ENV \
     DEBCONF_NONINTERACTIVE_SEEN="true" \
@@ -23,10 +23,7 @@ RUN \
     apt-get install --no-install-recommends -y \
         catatonit \
         intel-gpu-tools \
-        python3 \
-        python3-pip \
-    && pip install --no-cache-dir -r requirements.txt \
-    && apt-get remove -y python3-pip \
+    && pip install --requirement requirements.txt \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get clean \
@@ -36,7 +33,7 @@ RUN \
         /var/cache/apt/* \
         /var/tmp/*
 
-ENTRYPOINT ["/usr/bin/catatonit", "--", "/usr/bin/python3"]
+ENTRYPOINT ["/usr/bin/catatonit", "--", "/usr/local/bin/python"]
 CMD ["/app/intel-gpu-exporter.py"]
 
 LABEL \
