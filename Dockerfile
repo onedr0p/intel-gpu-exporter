@@ -23,8 +23,10 @@ RUN \
     apt-get install --no-install-recommends -y \
         catatonit \
         intel-gpu-tools \
+        python3 \
         python3-pip \
     && pip install --no-cache-dir -r requirements.txt \
+    && apt-get remove -y python3-pip \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
     && apt-get clean \
