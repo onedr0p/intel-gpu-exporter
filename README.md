@@ -6,6 +6,24 @@ Get metrics from Intel GPUs
 
 Runs on port 8080, does stuff, is hyperglued using python and intel_gpu_top
 
+### Docker Compose
+
+```yaml
+version: "3.8"
+
+services:
+  intel-gpu-exporter:
+    image: ghcr.io/onedr0p/intel-gpu-exporter:rolling
+    container_name: intel-gpu-exporter
+    restart: unless-stopped
+    privileged: true
+    pid: host
+    ports:
+      - 8080:8080
+    volumes:
+      - /dev/dri/:/dev/dri/
+```
+
 ## Metrics
 
 ```bash
