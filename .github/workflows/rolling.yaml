@@ -1,9 +1,8 @@
----
 name: rolling
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main", "dev"]
 
 jobs:
   build:
@@ -26,7 +25,8 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Build and Push
+      - name: Build and Push (main)
+        if: github.ref == 'refs/heads/main'
         uses: docker/build-push-action@v5
         with:
           context: .
@@ -35,3 +35,14 @@ jobs:
           push: true
           tags: |
             ghcr.io/${{ github.repository }}:rolling
+
+      - name: Build and Push (dev)
+        if: github.ref == 'refs/heads/dev'
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile
+          platforms: linux/amd64
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository }}:dev
