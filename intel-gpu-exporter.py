@@ -142,6 +142,7 @@ if __name__ == "__main__":
 
         if read == b"},\n":
             logging.debug("Output: " + output[:-2])
+            logging.debug("Output2: " + output)
             update(json.loads(output[:-2]))
             output = ""
 
