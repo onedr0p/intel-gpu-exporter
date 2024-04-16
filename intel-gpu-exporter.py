@@ -5,53 +5,102 @@ import subprocess
 import json
 import logging
 
-igpu_engines_blitter_0_busy = Gauge('igpu_engines_blitter_0_busy', 'Blitter 0 busy utilisation %')
-igpu_engines_blitter_0_sema = Gauge('igpu_engines_blitter_0_sema', 'Blitter 0 sema utilisation %')
-igpu_engines_blitter_0_wait = Gauge('igpu_engines_blitter_0_wait', 'Blitter 0 wait utilisation %')
+igpu_engines_blitter_0_busy = Gauge(
+    "igpu_engines_blitter_0_busy", "Blitter 0 busy utilisation %"
+)
+igpu_engines_blitter_0_sema = Gauge(
+    "igpu_engines_blitter_0_sema", "Blitter 0 sema utilisation %"
+)
+igpu_engines_blitter_0_wait = Gauge(
+    "igpu_engines_blitter_0_wait", "Blitter 0 wait utilisation %"
+)
 
-igpu_engines_render_3d_0_busy = Gauge('igpu_engines_render_3d_0_busy', 'Render 3D 0 busy utilisation %')
-igpu_engines_render_3d_0_sema = Gauge('igpu_engines_render_3d_0_sema', 'Render 3D 0 sema utilisation %')
-igpu_engines_render_3d_0_wait = Gauge('igpu_engines_render_3d_0_wait', 'Render 3D 0 wait utilisation %')
+igpu_engines_render_3d_0_busy = Gauge(
+    "igpu_engines_render_3d_0_busy", "Render 3D 0 busy utilisation %"
+)
+igpu_engines_render_3d_0_sema = Gauge(
+    "igpu_engines_render_3d_0_sema", "Render 3D 0 sema utilisation %"
+)
+igpu_engines_render_3d_0_wait = Gauge(
+    "igpu_engines_render_3d_0_wait", "Render 3D 0 wait utilisation %"
+)
 
-igpu_engines_video_0_busy = Gauge('igpu_engines_video_0_busy', 'Video 0 busy utilisation %')
-igpu_engines_video_0_sema = Gauge('igpu_engines_video_0_sema', 'Video 0 sema utilisation %')
-igpu_engines_video_0_wait = Gauge('igpu_engines_video_0_wait', 'Video 0 wait utilisation %')
+igpu_engines_video_0_busy = Gauge(
+    "igpu_engines_video_0_busy", "Video 0 busy utilisation %"
+)
+igpu_engines_video_0_sema = Gauge(
+    "igpu_engines_video_0_sema", "Video 0 sema utilisation %"
+)
+igpu_engines_video_0_wait = Gauge(
+    "igpu_engines_video_0_wait", "Video 0 wait utilisation %"
+)
 
-igpu_engines_video_enhance_0_busy = Gauge('igpu_engines_video_enhance_0_busy', 'Video Enhance 0 busy utilisation %')
-igpu_engines_video_enhance_0_sema = Gauge('igpu_engines_video_enhance_0_sema', 'Video Enhance 0 sema utilisation %')
-igpu_engines_video_enhance_0_wait = Gauge('igpu_engines_video_enhance_0_wait', 'Video Enhance 0 wait utilisation %')
+igpu_engines_video_enhance_0_busy = Gauge(
+    "igpu_engines_video_enhance_0_busy", "Video Enhance 0 busy utilisation %"
+)
+igpu_engines_video_enhance_0_sema = Gauge(
+    "igpu_engines_video_enhance_0_sema", "Video Enhance 0 sema utilisation %"
+)
+igpu_engines_video_enhance_0_wait = Gauge(
+    "igpu_engines_video_enhance_0_wait", "Video Enhance 0 wait utilisation %"
+)
 
-igpu_frequency_actual = Gauge('igpu_frequency_actual', 'Frequency actual MHz')
-igpu_frequency_requested = Gauge('igpu_frequency_requested', 'Frequency requested MHz')
+igpu_frequency_actual = Gauge("igpu_frequency_actual", "Frequency actual MHz")
+igpu_frequency_requested = Gauge("igpu_frequency_requested", "Frequency requested MHz")
 
-igpu_imc_bandwidth_reads = Gauge('igpu_imc_bandwidth_reads', 'IMC reads MiB/s')
-igpu_imc_bandwidth_writes = Gauge('igpu_imc_bandwidth_writes', 'IMC writes MiB/s')
+igpu_imc_bandwidth_reads = Gauge("igpu_imc_bandwidth_reads", "IMC reads MiB/s")
+igpu_imc_bandwidth_writes = Gauge("igpu_imc_bandwidth_writes", "IMC writes MiB/s")
 
-igpu_interrupts = Gauge('igpu_interrupts', 'Interrupts/s')
+igpu_interrupts = Gauge("igpu_interrupts", "Interrupts/s")
 
-igpu_period = Gauge('igpu_period', 'Period ms')
+igpu_period = Gauge("igpu_period", "Period ms")
 
-igpu_power_gpu = Gauge('igpu_power_gpu', 'GPU power W')
-igpu_power_package = Gauge('igpu_power_package', 'Package power W')
+igpu_power_gpu = Gauge("igpu_power_gpu", "GPU power W")
+igpu_power_package = Gauge("igpu_power_package", "Package power W")
 
-igpu_rc6 = Gauge('igpu_rc6', 'RC6 %')
+igpu_rc6 = Gauge("igpu_rc6", "RC6 %")
+
 
 def update(data):
-    igpu_engines_blitter_0_busy.set(data.get("engines", {}).get("Blitter/0", {}).get("busy", 0.0))
-    igpu_engines_blitter_0_sema.set(data.get("engines", {}).get("Blitter/0", {}).get("sema", 0.0))
-    igpu_engines_blitter_0_wait.set(data.get("engines", {}).get("Blitter/0", {}).get("wait", 0.0))
+    igpu_engines_blitter_0_busy.set(
+        data.get("engines", {}).get("Blitter/0", {}).get("busy", 0.0)
+    )
+    igpu_engines_blitter_0_sema.set(
+        data.get("engines", {}).get("Blitter/0", {}).get("sema", 0.0)
+    )
+    igpu_engines_blitter_0_wait.set(
+        data.get("engines", {}).get("Blitter/0", {}).get("wait", 0.0)
+    )
 
-    igpu_engines_render_3d_0_busy.set(data.get("engines", {}).get("Render/3D/0", {}).get("busy", 0.0))
-    igpu_engines_render_3d_0_sema.set(data.get("engines", {}).get("Render/3D/0", {}).get("sema", 0.0))
-    igpu_engines_render_3d_0_wait.set(data.get("engines", {}).get("Render/3D/0", {}).get("wait", 0.0))
+    igpu_engines_render_3d_0_busy.set(
+        data.get("engines", {}).get("Render/3D/0", {}).get("busy", 0.0)
+    )
+    igpu_engines_render_3d_0_sema.set(
+        data.get("engines", {}).get("Render/3D/0", {}).get("sema", 0.0)
+    )
+    igpu_engines_render_3d_0_wait.set(
+        data.get("engines", {}).get("Render/3D/0", {}).get("wait", 0.0)
+    )
 
-    igpu_engines_video_0_busy.set(data.get("engines", {}).get("Video/0", {}).get("busy", 0.0))
-    igpu_engines_video_0_sema.set(data.get("engines", {}).get("Video/0", {}).get("sema", 0.0))
-    igpu_engines_video_0_wait.set(data.get("engines", {}).get("Video/0", {}).get("wait", 0.0))
+    igpu_engines_video_0_busy.set(
+        data.get("engines", {}).get("Video/0", {}).get("busy", 0.0)
+    )
+    igpu_engines_video_0_sema.set(
+        data.get("engines", {}).get("Video/0", {}).get("sema", 0.0)
+    )
+    igpu_engines_video_0_wait.set(
+        data.get("engines", {}).get("Video/0", {}).get("wait", 0.0)
+    )
 
-    igpu_engines_video_enhance_0_busy.set(data.get("engines", {}).get("VideoEnhance/0", {}).get("busy", 0.0))
-    igpu_engines_video_enhance_0_sema.set(data.get("engines", {}).get("VideoEnhance/0", {}).get("sema", 0.0))
-    igpu_engines_video_enhance_0_wait.set(data.get("engines", {}).get("VideoEnhance/0", {}).get("wait", 0.0))
+    igpu_engines_video_enhance_0_busy.set(
+        data.get("engines", {}).get("VideoEnhance/0", {}).get("busy", 0.0)
+    )
+    igpu_engines_video_enhance_0_sema.set(
+        data.get("engines", {}).get("VideoEnhance/0", {}).get("sema", 0.0)
+    )
+    igpu_engines_video_enhance_0_wait.set(
+        data.get("engines", {}).get("VideoEnhance/0", {}).get("wait", 0.0)
+    )
 
     igpu_frequency_actual.set(data.get("frequency", {}).get("actual", 0))
     igpu_frequency_requested.set(data.get("frequency", {}).get("requested", 0))
@@ -68,28 +117,54 @@ def update(data):
 
     igpu_rc6.set(data.get("rc6", {}).get("value", 0))
 
-if __name__ == '__main__':
-    logging.basicConfig(format='%(asctime)s - %(message)s', level=logging.INFO)
+
+def is_docker():
+    return os.path.exists("/.dockerenv")
+
+
+if __name__ == "__main__":
+    if os.getenv("DEBUG", False):
+        debug = logging.DEBUG
+    else:
+        debug = logging.INFO
+    logging.basicConfig(format="%(asctime)s - %(message)s", level=debug)
+
     start_http_server(8080)
 
     period = os.getenv("REFRESH_PERIOD_MS", 10000)
 
-    cmd = 'intel_gpu_top -J -s {}'.format(int(period))
-    process = subprocess.Popen(cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    cmd = "intel_gpu_top -J -s {}".format(int(period))
+    process = subprocess.Popen(
+        cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
+    )
 
-    logging.info('Started ' + cmd)
-    output = ''
+    logging.info("Started " + cmd)
+    output = ""
 
-    while process.poll() is None:
-        read = process.stdout.readline()
-        output+=read.decode('utf-8')
-        if read == b'},\n':
-            update(json.loads(output[:-2]))
-            output = ''
+    if is_docker():
+        for line in process.stdout:
+            line = line.decode("utf-8").strip()
+            output += line
+
+            try:
+                data = json.loads(output)
+                logging.debug(data)
+                update(data)
+                output = ""
+            except json.JSONDecodeError:
+                continue
+    else:
+        while process.poll() is None:
+            read = process.stdout.readline()
+            output += read.decode("utf-8")
+            logging.debug(output)
+            if read == b"},\n":
+                update(json.loads(output[:-2]))
+                output = ""
 
     process.kill()
 
     if process.returncode != 0:
-        logging.error("Error: " + process.stderr.read().decode('utf-8'))
+        logging.error("Error: " + process.stderr.read().decode("utf-8"))
 
     logging.info("Finished")
