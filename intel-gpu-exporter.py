@@ -62,8 +62,6 @@ igpu_rc6 = Gauge("igpu_rc6", "RC6 %")
 
 
 def update(data):
-    logging.debug(data)
-
     igpu_engines_blitter_0_busy.set(
         data.get("engines", {}).get("Blitter/0", {}).get("busy", 0.0)
     )
@@ -143,6 +141,8 @@ if __name__ == "__main__":
         output += read.decode("utf-8")
 
         if read == b"},\n":
+            logging.debug(output)
+            logging.debug(output[:-2])
             update(json.loads(output[:-2]))
             output = ""
 
