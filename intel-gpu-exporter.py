@@ -136,16 +136,16 @@ if __name__ == "__main__":
     logging.info("Started " + cmd)
     output = ""
 
-    while process.poll() is None:
-        read = process.stdout.readline()
-        output += read.decode("utf-8")
-        logging.debug(read)
+    for line in process.stdout:
+        line = line.decode("utf-8").strip()
+        output += line
 
-        if read == b"},\n":
-            logging.debug(output)
-            logging.debug(output[:-2])
-            update(json.loads(output[:-2]))
+        try:
+            data = json.loads(output)
+            update(data)
             output = ""
+        except json.JSONDecodeError:
+            continue
 
     process.kill()
 
