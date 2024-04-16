@@ -118,10 +118,6 @@ def update(data):
     igpu_rc6.set(data.get("rc6", {}).get("value", 0))
 
 
-def is_docker():
-    return os.path.exists("/.dockerenv")
-
-
 if __name__ == "__main__":
     if os.getenv("DEBUG", False):
         debug = logging.DEBUG
@@ -141,7 +137,7 @@ if __name__ == "__main__":
     logging.info("Started " + cmd)
     output = ""
 
-    if is_docker():
+    if os.getenv("IS_DOCKER", False)
         for line in process.stdout:
             line = line.decode("utf-8").strip()
             output += line
