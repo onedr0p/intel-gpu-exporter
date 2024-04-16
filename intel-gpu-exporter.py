@@ -119,7 +119,11 @@ def update(data):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(format="%(asctime)s - %(message)s", level=logging.INFO)
+    if os.getenv("DEBUG", False):
+        debug = logging.DEBUG
+    else:
+        debug = logging.INFO
+    logging.basicConfig(format="%(asctime)s - %(message)s", level=debug)
     start_http_server(8080)
 
     period = os.getenv("REFRESH_PERIOD_MS", 10000)
@@ -134,6 +138,7 @@ if __name__ == "__main__":
 
     while process.poll() is None:
         read = process.stdout.readline()
+        logging.debug("Reading: ", read)
         output += read.decode("utf-8")
 
         if read == b"},\n":
