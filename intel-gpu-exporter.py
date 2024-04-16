@@ -137,7 +137,7 @@ if __name__ == "__main__":
     logging.info("Started " + cmd)
     output = ""
 
-    if os.getenv("IS_DOCKER", False)
+    if os.getenv("IS_DOCKER", False):
         for line in process.stdout:
             line = line.decode("utf-8").strip()
             output += line
