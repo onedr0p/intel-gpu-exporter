@@ -128,6 +128,7 @@ if __name__ == "__main__":
     else:
         debug = logging.INFO
     logging.basicConfig(format="%(asctime)s - %(message)s", level=debug)
+
     start_http_server(8080)
 
     period = os.getenv("REFRESH_PERIOD_MS", 10000)
@@ -147,6 +148,7 @@ if __name__ == "__main__":
 
             try:
                 data = json.loads(output)
+                logging.debug(data)
                 update(data)
                 output = ""
             except json.JSONDecodeError:
@@ -155,6 +157,7 @@ if __name__ == "__main__":
         while process.poll() is None:
             read = process.stdout.readline()
             output += read.decode("utf-8")
+            logging.debug(output)
             if read == b"},\n":
                 update(json.loads(output[:-2]))
                 output = ""
