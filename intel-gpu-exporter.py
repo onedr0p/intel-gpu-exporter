@@ -138,10 +138,10 @@ if __name__ == "__main__":
 
     while process.poll() is None:
         read = process.stdout.readline()
-        logging.debug("Reading: " + str(read))
         output += read.decode("utf-8")
 
         if read == b"},\n":
+            logging.debug("Output: " + output[:-2])
             update(json.loads(output[:-2]))
             output = ""
 
