@@ -119,11 +119,7 @@ def update(data):
 
 
 def is_docker():
-    try:
-        with open("/proc/self/cgroup", "r") as file:
-            return "docker" in file.read()
-    except FileNotFoundError:
-        return False
+    return os.path.exists("/.dockerenv")
 
 
 if __name__ == "__main__":
@@ -155,7 +151,6 @@ if __name__ == "__main__":
                 output = ""
             except json.JSONDecodeError:
                 continue
-
     else:
         while process.poll() is None:
             read = process.stdout.readline()
