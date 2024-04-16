@@ -139,6 +139,7 @@ if __name__ == "__main__":
     while process.poll() is None:
         read = process.stdout.readline()
         output += read.decode("utf-8")
+        logging.debug(read)
 
         if read == b"},\n":
             logging.debug(output)
