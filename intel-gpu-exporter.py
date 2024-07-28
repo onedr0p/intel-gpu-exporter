@@ -143,7 +143,7 @@ if __name__ == "__main__":
             output += line
 
             try:
-                data = json.loads(output)
+                data = json.loads(output.strip(","))
                 logging.debug(data)
                 update(data)
                 output = ""
