@@ -1,4 +1,4 @@
-FROM docker.io/library/python:3.13-slim
+FROM docker.io/library/debian:trixie-slim
 
 ENV \
     DEBCONF_NONINTERACTIVE_SEEN="true" \
@@ -24,6 +24,8 @@ RUN \
     apt-get install --no-install-recommends -y \
         catatonit \
         intel-gpu-tools \
+        python3 \
+        python3-pip \
     && pip install --requirement requirements.txt \
     && apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
     && apt-get autoremove -y \
@@ -34,7 +36,7 @@ RUN \
         /var/cache/apt/* \
         /var/tmp/*
 
-ENTRYPOINT ["/usr/bin/catatonit", "--", "/usr/local/bin/python"]
+ENTRYPOINT ["/usr/bin/catatonit", "--", "/usr/bin/python3"]
 CMD ["/app/intel-gpu-exporter.py"]
 
 LABEL \
