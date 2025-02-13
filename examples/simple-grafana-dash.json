@@ -18,7 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 2,
-  "id": 15,
+  "id": 5,
   "links": [
     {
       "asDropdown": true,
@@ -39,7 +39,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+        "uid": "edvvtg0kxx9mod"
       },
       "fieldConfig": {
         "defaults": {
@@ -53,6 +53,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -111,10 +112,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.0-pre",
       "targets": [
         {
           "datasource": {
@@ -122,7 +125,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_render_3d_0_busy{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_render_3d_busy",
           "instant": false,
           "legendFormat": "{{__name__}}",
           "range": true,
@@ -134,7 +137,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_render_3d_0_sema{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_render_3d_sema",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -147,7 +150,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_render_3d_0_wait{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_render_3d_wait",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -161,7 +164,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+        "uid": "edvvtg0kxx9mod"
       },
       "fieldConfig": {
         "defaults": {
@@ -175,6 +178,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -216,32 +220,7 @@
           },
           "unit": "percent"
         },
-        "overrides": [
-          {
-            "__systemRef": "hideSeriesFrom",
-            "matcher": {
-              "id": "byNames",
-              "options": {
-                "mode": "exclude",
-                "names": [
-                  "igpu_engines_blitter_0_busy"
-                ],
-                "prefix": "All except:",
-                "readOnly": true
-              }
-            },
-            "properties": [
-              {
-                "id": "custom.hideFrom",
-                "value": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": true
-                }
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
         "h": 8,
@@ -258,10 +237,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.0-pre",
       "targets": [
         {
           "datasource": {
@@ -269,7 +250,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_blitter_0_busy{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_blitter_busy",
           "instant": false,
           "legendFormat": "{{__name__}}",
           "range": true,
@@ -281,7 +262,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_blitter_0_sema{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_blitter_sema",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -294,7 +275,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_blitter_0_wait{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_blitter_wait",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -308,7 +289,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+        "uid": "edvvtg0kxx9mod"
       },
       "fieldConfig": {
         "defaults": {
@@ -322,6 +303,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -380,10 +362,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.0-pre",
       "targets": [
         {
           "datasource": {
@@ -391,7 +375,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_video_0_busy{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_video_busy",
           "instant": false,
           "legendFormat": "{{__name__}}",
           "range": true,
@@ -403,7 +387,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_video_0_sema{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_video_sema",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -416,7 +400,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_video_0_wait{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_video_wait",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -430,7 +414,7 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+        "uid": "edvvtg0kxx9mod"
       },
       "description": "",
       "fieldConfig": {
@@ -445,6 +429,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -503,10 +488,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.0-pre",
       "targets": [
         {
           "datasource": {
@@ -514,7 +501,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_video_enhance_0_busy{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_video_enhance_busy",
           "instant": false,
           "legendFormat": "{{__name__}}",
           "range": true,
@@ -526,7 +513,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_video_enhance_0_sema{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_video_enhance_sema",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -539,7 +526,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_engines_video_enhance_0_wait{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_video_enhance_wait",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -553,9 +540,8 @@
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+        "uid": "edvvtg0kxx9mod"
       },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -568,6 +554,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -607,7 +594,7 @@
               }
             ]
           },
-          "unit": "rotmhz"
+          "unit": "percent"
         },
         "overrides": []
       },
@@ -617,7 +604,7 @@
         "x": 0,
         "y": 16
       },
-      "id": 10,
+      "id": 13,
       "options": {
         "legend": {
           "calcs": [],
@@ -626,10 +613,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.0-pre",
       "targets": [
         {
           "datasource": {
@@ -637,7 +626,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_frequency_actual{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_compute_busy",
           "instant": false,
           "legendFormat": "{{__name__}}",
           "range": true,
@@ -649,21 +638,34 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_frequency_requested{instance=~\"${Instance}\"}",
+          "expr": "gpu_engines_compute_sema",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
           "range": true,
           "refId": "B"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+          },
+          "editorMode": "code",
+          "expr": "gpu_engines_compute_wait",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{__name__}}",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Frequency",
+      "title": "Compute",
       "type": "timeseries"
     },
     {
       "datasource": {
         "type": "prometheus",
-        "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+        "uid": "edvvtg0kxx9mod"
       },
       "description": "",
       "fieldConfig": {
@@ -678,6 +680,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -736,10 +739,12 @@
           "showLegend": true
         },
         "tooltip": {
+          "hideZeros": false,
           "mode": "single",
           "sort": "none"
         }
       },
+      "pluginVersion": "11.5.0-pre",
       "targets": [
         {
           "datasource": {
@@ -747,7 +752,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_imc_bandwidth_reads{instance=~\"${Instance}\"}",
+          "expr": "gpu_imc_bandwidth_reads",
           "instant": false,
           "legendFormat": "{{__name__}}",
           "range": true,
@@ -759,7 +764,7 @@
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
           "editorMode": "code",
-          "expr": "igpu_imc_bandwidth_writes{instance=~\"${Instance}\"}",
+          "expr": "gpu_imc_bandwidth_writes",
           "hide": false,
           "instant": false,
           "legendFormat": "{{__name__}}",
@@ -771,379 +776,362 @@
       "type": "timeseries"
     },
     {
-      "collapsed": true,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "edvvtg0kxx9mod"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "rotmhz"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 24
+      },
+      "id": 10,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.0-pre",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+          },
+          "editorMode": "code",
+          "expr": "gpu_frequency_actual",
+          "instant": false,
+          "legendFormat": "{{__name__}}",
+          "range": true,
+          "refId": "A"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+          },
+          "editorMode": "code",
+          "expr": "gpu_frequency_requested",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{__name__}}",
+          "range": true,
+          "refId": "B"
+        }
+      ],
+      "title": "Frequency",
+      "type": "timeseries"
+    },
+    {
+      "collapsed": false,
       "gridPos": {
         "h": 1,
         "w": 24,
         "x": 0,
-        "y": 24
+        "y": 32
       },
       "id": 4,
-      "panels": [
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+      "panels": [],
+      "title": "Misc",
+      "type": "row"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "edvvtg0kxx9mod"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "watt"
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
             },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 12,
-            "x": 0,
-            "y": 25
-          },
-          "id": 1,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
             },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
             }
           },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-              },
-              "editorMode": "code",
-              "expr": "igpu_power_package{instance=~\"${Instance}\"}",
-              "instant": false,
-              "legendFormat": "{{__name__}}",
-              "range": true,
-              "refId": "A"
-            },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-              },
-              "editorMode": "code",
-              "expr": "igpu_power_gpu{instance=~\"${Instance}\"}",
-              "hide": false,
-              "instant": false,
-              "legendFormat": "{{__name__}}",
-              "range": true,
-              "refId": "B"
-            }
-          ],
-          "title": "iGPU Power",
-          "type": "timeseries"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-          },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "palette-classic"
-              },
-              "custom": {
-                "axisBorderShow": false,
-                "axisCenteredZero": false,
-                "axisColorMode": "text",
-                "axisLabel": "",
-                "axisPlacement": "auto",
-                "barAlignment": 0,
-                "drawStyle": "line",
-                "fillOpacity": 0,
-                "gradientMode": "none",
-                "hideFrom": {
-                  "legend": false,
-                  "tooltip": false,
-                  "viz": false
-                },
-                "insertNulls": false,
-                "lineInterpolation": "linear",
-                "lineWidth": 1,
-                "pointSize": 5,
-                "scaleDistribution": {
-                  "type": "linear"
-                },
-                "showPoints": "auto",
-                "spanNulls": false,
-                "stacking": {
-                  "group": "A",
-                  "mode": "none"
-                },
-                "thresholdsStyle": {
-                  "mode": "off"
-                }
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "absolute",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "red",
-                    "value": 80
-                  }
-                ]
-              },
-              "unit": "none"
-            },
-            "overrides": [
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "igpu_rc6"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "percent"
-                  }
-                ]
+                "color": "green",
+                "value": null
               },
               {
-                "matcher": {
-                  "id": "byName",
-                  "options": "igpu_interrupts"
-                },
-                "properties": [
-                  {
-                    "id": "unit",
-                    "value": "recps"
-                  }
-                ]
+                "color": "red",
+                "value": 80
               }
             ]
           },
-          "gridPos": {
-            "h": 8,
-            "w": 8,
-            "x": 12,
-            "y": 25
-          },
-          "id": 3,
-          "options": {
-            "legend": {
-              "calcs": [],
-              "displayMode": "list",
-              "placement": "bottom",
-              "showLegend": true
+          "unit": "none"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "igpu_rc6"
             },
-            "tooltip": {
-              "mode": "single",
-              "sort": "none"
-            }
+            "properties": [
+              {
+                "id": "unit",
+                "value": "percent"
+              }
+            ]
           },
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-              },
-              "editorMode": "code",
-              "expr": "igpu_rc6{instance=~\"${Instance}\"}",
-              "instant": false,
-              "legendFormat": "{{__name__}}",
-              "range": true,
-              "refId": "A"
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "igpu_interrupts"
             },
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-              },
-              "editorMode": "code",
-              "expr": "igpu_interrupts{instance=~\"${Instance}\"}",
-              "hide": false,
-              "instant": false,
-              "legendFormat": "{{__name__}}",
-              "range": true,
-              "refId": "C"
-            }
-          ],
-          "title": "R6 & Interrupts ",
-          "type": "timeseries"
+            "properties": [
+              {
+                "id": "unit",
+                "value": "recps"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 8,
+        "x": 0,
+        "y": 33
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.5.0-pre",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+          },
+          "editorMode": "code",
+          "expr": "gpu_rc6",
+          "instant": false,
+          "legendFormat": "{{__name__}}",
+          "range": true,
+          "refId": "A"
         },
         {
           "datasource": {
             "type": "prometheus",
             "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
           },
-          "fieldConfig": {
-            "defaults": {
-              "color": {
-                "mode": "thresholds"
-              },
-              "mappings": [],
-              "thresholds": {
-                "mode": "percentage",
-                "steps": [
-                  {
-                    "color": "green"
-                  },
-                  {
-                    "color": "orange",
-                    "value": 70
-                  },
-                  {
-                    "color": "red",
-                    "value": 85
-                  }
-                ]
-              },
-              "unit": "ms"
-            },
-            "overrides": []
-          },
-          "gridPos": {
-            "h": 8,
-            "w": 4,
-            "x": 20,
-            "y": 25
-          },
-          "id": 12,
-          "options": {
-            "colorMode": "value",
-            "graphMode": "none",
-            "justifyMode": "auto",
-            "orientation": "auto",
-            "reduceOptions": {
-              "calcs": [
-                "lastNotNull"
-              ],
-              "fields": "",
-              "values": false
-            },
-            "showPercentChange": false,
-            "textMode": "auto",
-            "wideLayout": true
-          },
-          "pluginVersion": "10.4.2",
-          "targets": [
-            {
-              "datasource": {
-                "type": "prometheus",
-                "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-              },
-              "editorMode": "code",
-              "expr": "igpu_period{instance=~\"${Instance}\"}",
-              "instant": false,
-              "legendFormat": "__auto",
-              "range": true,
-              "refId": "A"
-            }
-          ],
-          "title": "Period",
-          "type": "stat"
+          "editorMode": "code",
+          "expr": "gpu_interrupts",
+          "hide": false,
+          "instant": false,
+          "legendFormat": "{{__name__}}",
+          "range": true,
+          "refId": "C"
         }
       ],
-      "title": "Misc",
-      "type": "row"
+      "title": "R6 & Interrupts ",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "edvvtg0kxx9mod"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "orange",
+                "value": 70
+              },
+              {
+                "color": "red",
+                "value": 85
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 4,
+        "x": 8,
+        "y": 33
+      },
+      "id": 12,
+      "options": {
+        "colorMode": "value",
+        "graphMode": "none",
+        "justifyMode": "auto",
+        "orientation": "auto",
+        "percentChangeColorMode": "standard",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showPercentChange": false,
+        "textMode": "auto",
+        "wideLayout": true
+      },
+      "pluginVersion": "11.5.0-pre",
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
+          },
+          "editorMode": "code",
+          "expr": "gpu_period",
+          "instant": false,
+          "legendFormat": "__auto",
+          "range": true,
+          "refId": "A"
+        }
+      ],
+      "title": "Period",
+      "type": "stat"
     }
   ],
+  "preload": false,
   "refresh": "5s",
-  "schemaVersion": 39,
+  "schemaVersion": 40,
   "tags": [
     "igpu",
     "intel",
     "transcoding"
   ],
   "templating": {
-    "list": [
-      {
-        "current": {
-          "selected": false,
-          "text": "cloud.host.jhofer.local:8081",
-          "value": "cloud.host.jhofer.local:8081"
-        },
-        "datasource": {
-          "type": "prometheus",
-          "uid": "f9422c25-b9ee-4376-8bd2-6a67029728ce"
-        },
-        "definition": "label_values({job=\"intel-gpu_exporter\"},instance)",
-        "hide": 0,
-        "includeAll": false,
-        "multi": false,
-        "name": "Instance",
-        "options": [],
-        "query": {
-          "qryType": 1,
-          "query": "label_values({job=\"intel-gpu_exporter\"},instance)",
-          "refId": "PrometheusVariableQueryEditor-VariableQuery"
-        },
-        "refresh": 1,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "type": "query"
-      }
-    ]
+    "list": []
   },
   "time": {
-    "from": "now-12h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Intel iGPU",
+  "title": "Intel GPU",
   "uid": "ddittat0n2i9se",
-  "version": 9,
+  "version": 5,
   "weekStart": ""
 }
