@@ -128,8 +128,13 @@ if __name__ == "__main__":
     start_http_server(8080)
 
     period = os.getenv("REFRESH_PERIOD_MS", 10000)
+    device = os.getenv("DEVICE")
 
-    cmd = "intel_gpu_top -J -s {}".format(int(period))
+    if device is not None:
+        cmd = "intel_gpu_top -J -s {} -d {}".format(int(period), device)
+    else:
+        cmd = "intel_gpu_top -J -s {}".format(int(period))
+
     process = subprocess.Popen(
         cmd.split(), stdout=subprocess.PIPE, stderr=subprocess.PIPE
     )
