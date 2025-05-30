@@ -1,5 +1,8 @@
 # intel-gpu-exporter
 
+> [!IMPORTANT]
+> I am no longer using this, and have no plans to continue support. Please consider forking if interested in using.
+
 Get metrics from Intel GPUs
 
 ## Deployment
